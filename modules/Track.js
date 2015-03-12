@@ -2,7 +2,7 @@ function Track() {
 
 }
 
-Truck.prototype = {
+Track.prototype = {
 
 };
 
