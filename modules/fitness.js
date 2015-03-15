@@ -24,8 +24,7 @@ module.exports = {
   },
 
   setFitness: function (car) {
-    var fitness = this.calculate(car);
-    car.fitness = fitness;
+    car.fitness  = this.calculate(car);
   },
 
   setFittest: function (cars) {
