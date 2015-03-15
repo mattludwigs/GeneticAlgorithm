@@ -1,14 +1,15 @@
 // Dependencies
 var Population = require("./modules/Population"),
 		Car = require("./modules/car"),
-		fitness = require("./modules/fitness");
+		fitness = require("./modules/fitness"),
+		Track = require("./modules/Track");
 
 
 // Configs
 var config = {
 	iterations: 10,
 	maxSpeed: 125,
-	carsLen: 4,
+	carsLen: 5,
 	miles: 50,
 	time: 250
 };
@@ -24,9 +25,17 @@ var config = {
 
 	// Set initial Population
 	population.generatePop();
+	var track = new Track(4, config.miles, population.cars);
 
-	// Run through track
+	// placeInit Cars
+	track.placeCars(population.cars);
 
-	//
+	//console.log(population.cars[0].location);
+
+	for (var j = 0; j < track.feet; j++) {
+		track.runTrack();
+	}
+
+	console.log(population.cars);
 
 })();

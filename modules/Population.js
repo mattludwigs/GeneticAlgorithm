@@ -3,7 +3,7 @@ var CarFactory = require("./carFactory"),
 
 function Population(popSize, config) {
   this.popSize = popSize;
-  this.population = [];
+  this.cars = [];
   this.config = config;
 }
 
@@ -20,7 +20,7 @@ Population.prototype = {
         deceleration: randomizer.getRan(0, 10)
       });
 
-      this.population.push(_car);
+      this.cars.push(_car);
     }
   }
 
