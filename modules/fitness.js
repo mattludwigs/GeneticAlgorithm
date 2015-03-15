@@ -1,3 +1,5 @@
+
+
 module.exports = {
 
   calculate: function (car)  {
@@ -24,6 +26,29 @@ module.exports = {
   setFitness: function (car) {
     var fitness = this.calculate(car);
     car.fitness = fitness;
+  },
+
+  setFittest: function (cars) {
+    var currentFittest,
+        i;
+
+    for (i = 0; i < cars.length; i++) {
+      var car = cars[i];
+
+      if (!currentFittest) {
+        currentFittest = car;
+      } else {
+        if (this.optimum.fitness - currentFittest.fitness > this.optimum.fitness - car.fitness) {
+          currentFittest = car;
+        }
+      }
+    }
+
+    this.fittest = currentFittest;
+  },
+
+  getFittest: function () {
+    return this.fittest;
   }
 
 

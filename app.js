@@ -36,6 +36,11 @@ var config = {
 		track.runTrack();
 	}
 
-	console.log(population.cars);
+	for (j = 0; j < population.cars.length; j++) {
+		fitness.setFitness(population.cars[j]);
+	}
+
+	fitness.setFittest(population.cars);
+	console.log(fitness.getFittest());
 
 })();
