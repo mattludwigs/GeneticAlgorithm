@@ -9,7 +9,7 @@ var Population = require("./modules/Population"),
 var config = {
 	iterations: 10,
 	maxSpeed: 125,
-	carsLen: 5,
+	carsLen: 1000,
 	miles: 50,
 	time: 250
 };
