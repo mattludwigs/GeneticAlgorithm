@@ -9,7 +9,7 @@ function Population(popSize, config) {
 
 Population.prototype = {
 
-  generatePop: function () {
+  create: function () {
     var cf = new CarFactory(),
       i;
 

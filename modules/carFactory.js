@@ -1,13 +1,7 @@
-var Car = require("./car");
+"use strict";
+let car = require("./car"),
+		_ = require("underscore");
 
-function CarFactory() {}
-
-CarFactory.prototype = {
-
-	createCar: function (options) {
-		return new Car(options.speed, options.acceleration, options.deceleration);
-	}
-
-};
-
-module.exports = CarFactory;
+module.exports = function carFactory (options) {
+	return _.extend(Object.create(car), options)
+}

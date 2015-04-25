@@ -1,4 +1,7 @@
 {
-  "name": "genentic-algorthim-for-selfdriving cars",
-  "version": "0.0.0"
+  "name": "genentic-algorthim-for-selfdrivingcars",
+  "version": "0.0.0",
+  "dependencies": {
+    "lodash": "^3.6.0"
+  }
 }
