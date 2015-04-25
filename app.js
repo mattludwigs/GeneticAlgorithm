@@ -1,71 +1,25 @@
-//// Dependencies
-//var Population = require("./modules/Population"),
-//		Car = require("./modules/car"),
-//		fitness = require("./modules/fitness"),
-//		Track = require("./modules/Track");
-//
+"use strict";
 
-//
-//// Configs
-//var config = {
-//	iterations: 10,
-//	maxSpeed: 125,
-//	carsLen: 10,
-//	miles: 50,
-//	time: 250
-//};
-//
-//
-//// Run the App
-//(function () {
-//	var population = new Population(config.carsLen, config),
-//			i;
-//
-//	// Set Optimum Car
-//	fitness.setOptimum(new Car(65, 0, 0));
-//
-//	// Set initial Population
-//	population.generatePop();
-//	var track = new Track(4, config.miles, population.cars);
-//
-//	// placeInit Cars
-//	track.placeCars(population.cars);
-//
-//	//console.log(population.cars[0].location);
-//
-//	for (var j = 0; j < track.feet; j++) {
-//		track.runTrack();
-//	}
-//
-//	for (j = 0; j < population.cars.length; j++) {
-//		fitness.setFitness(population.cars[j]);
-//	}
-//
-//	fitness.setFittest(population.cars);
-//	console.log(fitness.getFittest());
-//
-//})();
-
-
-var Track = require("./modules/Track"),
+var trackBuilder = require("./modules/track"),
 		PopGen = require("./modules/PopGen"),
 		run = require("./modules/run"),
+		car = require("./modules/car"),
+		_ = require("lodash"),
+		fitness = require("./modules/fitness"),
 		time = Date.now();
 
-// generate track
-var track = new Track({
-	distance: 50,
-	lanes: 4
-}).generateLanes().generateDistance();
+var track = trackBuilder
+	.distance(50)
+	.lanes(4)
+	.generateTrack();
 
 // generate population
-var gen = PopGen.limit(15).pop().get();
+var gen = PopGen.limit(10).pop().get();
+var optimum = _.extend(Object.create(car), {
+	speed: 65
+});
 
-	// breed or new
-	// average of partents
-	// mutations 0 - 2n
-
-// Place on track
-track.placeGen(gen);
+fitness.setOptimum(optimum);
+trackBuilder.placeGen(gen);
 
 run(gen);

@@ -1,39 +1,39 @@
 var _ = require("lodash");
 
-function Track(config) {
-  this.distance = config.distance * 5280;
-  this.lanes = config.lanes;
-  this.cordinates = {};
-  this.cordinates.x = [];
-  this.cordinates.y = [];
-  return this;
-}
-
-Track.prototype = {
-
-  generateLanes: function () {
-    var i = 0;
-
-    for (i = 0; i > this.lanes; i++) {
-      this.cordinates.x.push(i);
-    }
+module.exports = {
+  
+  cordinates: {
+    x: [],
+    y: []
+  },
+  
+  distance: function distance (distance) {
+    this.distance = distance * 5280;
     return this;
   },
 
-  generateDistance: function () {
-    var i;
+  lanes: function lanes (numberOfLanes) {
+    this.lanes = numberOfLanes;
+    return this;
+  },
 
-    for (i = 0; i < this.distance; i++) {
+  generateTrack: function generateTrack () {
+    var i;
+    for (i = 0; i > this.lanes; i++) {
+      this.cordinates.x.push(i);
+    }
+
+    for (i = 0; i > this.distance; i++) {
       this.cordinates.y.push(i);
     }
     return this;
   },
 
-  placeGen: function (gen) {
+  placeGen: function placeGen (pop) {
     var _x = 1,
         _y = 0;
 
-    _.forEach(gen, function (car) {
+    _.forEach(pop, function (car) {
       car.location.x = _x;
       car.location.y = _y;
       car.setDistance(this.distance);
@@ -46,6 +46,4 @@ Track.prototype = {
       }
     }.bind(this));
   }
-};
-
-module.exports = Track;
+}

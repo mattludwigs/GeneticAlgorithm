@@ -35,7 +35,7 @@ module.exports = {
         i;
 
     for (i = 0; i < this._limit; i++) {
-      let _car = carFactory({
+      var _car = carFactory({
         speed: randomizer.getRan(0, _speed),
         acceleration: randomizer.getRan(0, 10),
         deceleration: randomizer.getRan(0, 10)

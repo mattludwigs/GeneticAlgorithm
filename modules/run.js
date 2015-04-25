@@ -1,6 +1,14 @@
+"use strict";
 var _ = require("lodash"),
     fitness = require("./fitness"),
+    Breeder = require("./breeder"),
+    trackBuilder = require("./track"),
     driving = [];
+
+var config = {
+  iterations: 4,
+  count: 1
+}    
 
 function run(pop) {
 
@@ -31,17 +39,43 @@ function run(pop) {
     setTimeout(function () {
       _.forEach(driving, function (car) {
         if (car) {
-          car.updateY(250);
+          car.updateY(1000);
         }
-        run(pop);
+        if (driving.length > 0) {
+          run(pop);
+        }
       });
-    }, 250);
+    }, 1000);
   } else {
+    console.log("setting fitness" + " " + config.count);
+    var finalGen;
+
     _.forEach(pop, function (car) {
       fitness.setFitness(car);
-      console.log(car.fitness);
-      console.log(car.speed);
-    })
+      console.log(car.avgVelocity);
+    });
+
+    if (config.count < config.iterations) {
+      console.log("new pop" + " " + config.count);
+      var newGen = Breeder
+        .oldPop(pop)
+        .newPop()
+        .getTop()
+        .getBottom()
+        .breed();
+
+      pop = null;
+
+      Breeder.flush();
+
+      trackBuilder.placeGen(newGen);
+
+      config.count += 1;
+      run(newGen);
+    } else {
+      console.log(fitness.getFittest(pop));
+    }
+
   }
 }
 

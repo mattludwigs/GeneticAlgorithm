@@ -1,5 +1,5 @@
 "use strict";
-let car = require("./car"),
+var car = require("./car"),
 		_ = require("underscore");
 
 module.exports = function carFactory (options) {
