@@ -1,1 +1,1 @@
-A Genetic Algroithm started to see if optimizing algorithms could be used to make self driving cars
+A Genetic Algorithm started to see if optimizing algorithms could be used to make self driving cars
