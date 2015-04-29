@@ -4,49 +4,32 @@ var randomizer = require("./randomizer");
 
 module.exports = {
 	speed: 0,
-	fitness: 0,
+	distance: 0,
+	startTime: false,
+	stopTime: false,
+	driving: false,
 	avgVelocity: 0,
-	avgAcceleration: 0,
-	avgDeceleration: 0,
-	desiredDeceleration: 0,
-	desiredAcceleration: 0,
-	drive: function drive () {
-		this.startTime = Date.now();
-		this.startPosition = this.location.y;
+	fitness: 0,
+	drive: function drive (time) {
+		if (!this.startTime) {
+			this.startTime = Date.now();
+		}
 		this.driving = true;
-		return this;
+		this.updateY(time);
 	},
-
 	stop: function stop () {
-		this.stopTime = Date.now();
+		if (!this.stopTime) {
+			this.stopTime = Date.now();
+		}
 		this.driving = false;
-		return this;
+		this.totalTime = this.stopTime - this.startTime
 	},
-
-	setDistance: function setDistance (distance) {
-		this.distance = distance - this.location.y;
-
-		return this;
-	},
-
-	totalTime: function totalTime () {
-		return (this.stopTime - this.startTime);
-	},
-
-	updateY: function updateY (time) {
-		// 0.001 feet/milliseconds 1
+	updateY: function (time) {
 		this.location.y = this.location.y + ((0.001 * (this.speed * 1.46667) * time));
-		return this;
 	},
-
 	solveVelocity: function solveVelocity () {
-		this.avgVelocity = this.distance / this.totalTime;
-		return this;
-	},
-
-	location: {
-		x: 0,
-		y: 0
+		this.avgVelocity =  this.distance / this.totalTime;
 	}
-};
+}
+
 

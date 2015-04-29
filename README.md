@@ -1,1 +1,1 @@
-this is a read me
+A Genetic Algroithm started to see if optimizing algorithms could be used to make self driving cars

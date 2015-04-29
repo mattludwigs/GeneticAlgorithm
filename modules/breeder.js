@@ -1,6 +1,6 @@
 "use strict";
 
-var PopGen = require("./PopGen"),
+let PopGen = require("./PopGen"),
 		car = require("./car"),
 		_ = require("lodash");
 
@@ -12,7 +12,7 @@ module.exports = {
 	},
 
 	mate: function mate (parents) {
-		var speed, desiredDeceleration, desiredAcceleration;
+		let speed, desiredDeceleration, desiredAcceleration;
 
 		speed = (parents[0].speed + parents[1].speed) / 2;
 		desiredAcceleration = (parents[0].desiredAcceleration + parents[1].desiredAcceleration) / 2;
@@ -20,8 +20,7 @@ module.exports = {
 
 		return _.extend(Object.create(car), {
 			speed: speed,
-			desiredDeceleration: desiredDeceleration,
-			desiredAcceleration: desiredAcceleration
+			location : {}
 		});
 	},
 
@@ -37,7 +36,7 @@ module.exports = {
 	},
 
 	getTop: function getTop () {
-		var child;
+		let child;
 
 		this.topTwo = this.pop.sort(function (a, b) {
 			return b.fitness - a.fitness;
@@ -50,7 +49,7 @@ module.exports = {
 	},	
 
 	getBottom: function getBottom () {
-		var child;
+		let child;
 
 		this.bottomTwo = this.pop.sort(function (a, b) {
 			return a.fitness - b.fitness;
@@ -70,7 +69,15 @@ module.exports = {
 	},
 
 	breed: function breed () {
-		return this.bottomTwo.concat(this.topTwo).concat(this.gen);
+		let newPop = this.bottomTwo.concat(this.topTwo).concat(this.gen);
+		_.forEach(newPop, function (car) {
+			car.location.x = 0;
+			car.location.y = 0;
+			car.startTime = false;
+			car.stopTime = false;
+		});
+
+		return newPop;
 	}
 
 

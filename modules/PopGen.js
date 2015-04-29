@@ -35,11 +35,7 @@ module.exports = {
         i;
 
     for (i = 0; i < this._limit; i++) {
-      var _car = carFactory({
-        speed: randomizer.getRan(0, _speed),
-        acceleration: randomizer.getRan(0, 10),
-        deceleration: randomizer.getRan(0, 10)
-      });
+      var _car = carFactory({speed: randomizer.getRan(100, _speed)});
 
      this._pop.push(_car);
     }

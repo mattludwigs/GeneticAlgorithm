@@ -1,7 +1,7 @@
 var _ = require("lodash");
 
 module.exports = {
-  
+
   cordinates: {
     x: [],
     y: []
@@ -31,12 +31,13 @@ module.exports = {
 
   placeGen: function placeGen (pop) {
     var _x = 1,
-        _y = 0;
+        _y = 0,
+        self = this;
 
     _.forEach(pop, function (car) {
       car.location.x = _x;
       car.location.y = _y;
-      car.setDistance(this.distance);
+      car.distance = this.distance;
 
       if (_x >= this.lanes) {
         _x = 1;
